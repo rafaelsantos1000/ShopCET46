@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30128.36
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopCET46.Common", "ShopCET46.Common\ShopCET46.Common.csproj", "{7634B647-F4A5-431B-94B8-BF2712729013}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopCET46.Web", "ShopCET46.Web\ShopCET46.Web.csproj", "{ECACDDF9-41BE-4D9E-822D-8A2D88FFA469}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7634B647-F4A5-431B-94B8-BF2712729013}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7634B647-F4A5-431B-94B8-BF2712729013}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7634B647-F4A5-431B-94B8-BF2712729013}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7634B647-F4A5-431B-94B8-BF2712729013}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECACDDF9-41BE-4D9E-822D-8A2D88FFA469}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECACDDF9-41BE-4D9E-822D-8A2D88FFA469}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECACDDF9-41BE-4D9E-822D-8A2D88FFA469}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECACDDF9-41BE-4D9E-822D-8A2D88FFA469}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AE9C0C4F-BD5B-4434-B9D2-84DF9CB08BDC}
+	EndGlobalSection
+EndGlobal
