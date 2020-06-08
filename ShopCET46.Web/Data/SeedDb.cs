@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Internal;
 using ShopCET46.Web.Data.Entities;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -10,7 +9,7 @@ namespace ShopCET46.Web.Data
     public class SeedDb
     {
         private readonly DataContext _context;
-        private Random _random;
+        private readonly Random _random;
 
         public SeedDb(DataContext context)
         {
@@ -23,7 +22,7 @@ namespace ShopCET46.Web.Data
         {
             await _context.Database.EnsureCreatedAsync();
 
-            if(!_context.Products.Any())
+            if (!_context.Products.Any())
             {
                 this.AddProduct("Boné oficial SLB");
                 this.AddProduct("Cueca oficial SLB");
