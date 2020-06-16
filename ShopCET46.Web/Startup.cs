@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ShopCET46.Web.Data;
+using ShopCET46.Web.Data.Entities;
 
 namespace ShopCET46.Web
 {
@@ -31,7 +32,8 @@ namespace ShopCET46.Web
 
 
             services.AddTransient<SeedDb>();
-            services.AddScoped<IRepository, Repository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<ICountryRepository, CountryRepository>();
 
 
             services.Configure<CookiePolicyOptions>(options =>

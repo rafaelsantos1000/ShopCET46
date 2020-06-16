@@ -7,7 +7,9 @@ namespace ShopCET46.Web.Data
 {
     public class Repository : IRepository
     {
+
         private readonly DataContext _context;
+
 
 
         public Repository(DataContext context)
@@ -16,10 +18,12 @@ namespace ShopCET46.Web.Data
         }
 
 
+
         public IEnumerable<Product> GetProducts()
         {
             return _context.Products.OrderBy(p => p.Name);
         }
+
 
 
         public Product GetProduct(int id)
