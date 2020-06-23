@@ -1,12 +1,14 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ShopCET46.Web.Data;
 using ShopCET46.Web.Data.Entities;
+using ShopCET46.Web.Helpers;
 
 namespace ShopCET46.Web
 {
@@ -25,6 +27,20 @@ namespace ShopCET46.Web
         public void ConfigureServices(IServiceCollection services)
         {
 
+
+            services.AddIdentity<User, IdentityRole>(cfg =>
+            {
+                cfg.User.RequireUniqueEmail = true;
+                cfg.Password.RequireDigit = false;
+                cfg.Password.RequiredUniqueChars = 0;
+                cfg.Password.RequireLowercase = false;
+                cfg.Password.RequireNonAlphanumeric = false;
+                cfg.Password.RequireUppercase = false;
+                cfg.Password.RequiredLength = 6;
+            })
+            .AddEntityFrameworkStores<DataContext>();
+            
+
             services.AddDbContext<DataContext>(cfg =>
             {
                 cfg.UseSqlServer(this.Configuration.GetConnectionString("DefaultConnection"));
@@ -32,6 +48,7 @@ namespace ShopCET46.Web
 
 
             services.AddTransient<SeedDb>();
+            services.AddScoped<IUserHelper, UserHelper>();
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<ICountryRepository, CountryRepository>();
 

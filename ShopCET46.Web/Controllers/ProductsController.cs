@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using ShopCET46.Web.Data;
 using ShopCET46.Web.Data.Entities;
+using ShopCET46.Web.Helpers;
 using System.Threading.Tasks;
 
 namespace ShopCET46.Web.Controllers
@@ -10,11 +11,14 @@ namespace ShopCET46.Web.Controllers
     {
         
         private readonly IProductRepository _productRepository;
+        private readonly IUserHelper _userHelper;
 
-        public ProductsController(IProductRepository productRepository)
+
+        public ProductsController(IProductRepository productRepository, IUserHelper userHelper)
         {
         
             _productRepository = productRepository;
+            _userHelper = userHelper;
         }
 
 
@@ -58,6 +62,8 @@ namespace ShopCET46.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                //TODO: Change to the logged user
+                product.User = await _userHelper.GetUserByEmailAsync("rafaasfs@gmail.com");
                 await _productRepository.CreateAsync(product);
                 return RedirectToAction(nameof(Index));
             }
@@ -94,6 +100,8 @@ namespace ShopCET46.Web.Controllers
             {
                 try
                 {
+                    //TODO: Change to the logged user
+                    product.User = await _userHelper.GetUserByEmailAsync("rafaasfs@gmail.com");
                     await _productRepository.UpdateAsync(product);
                 }
                 catch (DbUpdateConcurrencyException)
