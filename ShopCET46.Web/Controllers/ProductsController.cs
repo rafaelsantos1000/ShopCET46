@@ -6,20 +6,21 @@ using ShopCET46.Web.Helpers;
 using ShopCET46.Web.Models;
 using System;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace ShopCET46.Web.Controllers
 {
     public class ProductsController : Controller
     {
-        
+
         private readonly IProductRepository _productRepository;
         private readonly IUserHelper _userHelper;
 
 
         public ProductsController(IProductRepository productRepository, IUserHelper userHelper)
         {
-        
+
             _productRepository = productRepository;
             _userHelper = userHelper;
         }
@@ -28,7 +29,7 @@ namespace ShopCET46.Web.Controllers
         // GET: Products
         public IActionResult Index()
         {
-            return View(_productRepository.GetAll());
+            return View(_productRepository.GetAll().OrderBy(p => p.Name));
         }
 
 
@@ -68,19 +69,22 @@ namespace ShopCET46.Web.Controllers
 
                 var path = string.Empty;
 
-                if(model.ImageFile != null && model.ImageFile.Length > 0)
+                if (model.ImageFile != null && model.ImageFile.Length > 0)
                 {
+                    var guid = Guid.NewGuid().ToString();
+                    var file = $"{guid}.jpg";
+
                     path = Path.Combine(
                         Directory.GetCurrentDirectory(),
                         "wwwroot\\images\\Products",
-                        model.ImageFile.FileName);
+                        file);
 
-                    using(var stream = new FileStream(path, FileMode.Create))
+                    using (var stream = new FileStream(path, FileMode.Create))
                     {
                         await model.ImageFile.CopyToAsync(stream);
                     }
 
-                    path = $"~/images/Products/{model.ImageFile.FileName}";
+                    path = $"~/images/Products/{file}";
                 }
 
                 var product = this.ToProduct(model, path);
@@ -163,17 +167,20 @@ namespace ShopCET46.Web.Controllers
 
                     if (model.ImageFile != null && model.ImageFile.Length > 0)
                     {
+                        var guid = Guid.NewGuid().ToString();
+                        var file = $"{guid}.jpg";
+
                         path = Path.Combine(
                             Directory.GetCurrentDirectory(),
                             "wwwroot\\images\\Products",
-                            model.ImageFile.FileName);
+                            file);
 
                         using (var stream = new FileStream(path, FileMode.Create))
                         {
                             await model.ImageFile.CopyToAsync(stream);
                         }
 
-                        path = $"~/images/Products/{model.ImageFile.FileName}";
+                        path = $"~/images/Products/{file}";
                     }
 
                     var product = this.ToProduct(model, path);

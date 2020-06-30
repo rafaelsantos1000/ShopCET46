@@ -1,0 +1,232 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2018-05-01/subscriptionDeploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "resources": [
+    {
+      "type": "Microsoft.Resources/resourceGroups",
+      "name": "STORERAFA",
+      "location": "centralus",
+      "apiVersion": "2019-10-01"
+    },
+    {
+      "type": "Microsoft.Resources/deployments",
+      "name": "[concat('STORERAFADeployment', uniqueString(subscription().subscriptionId))]",
+      "resourceGroup": "STORERAFA",
+      "apiVersion": "2019-10-01",
+      "dependsOn": [
+        "STORERAFA"
+      ],
+      "properties": {
+        "mode": "Incremental",
+        "template": {
+          "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+          "contentVersion": "1.0.0.0",
+          "resources": [
+            {
+              "id": "/subscriptions/2d981ce6-1f39-462f-9ae6-b915230e0f93/resourceGroups/STORERAFA/providers/Microsoft.Web/sites/ShopCET46",
+              "name": "ShopCET46",
+              "type": "Microsoft.Web/sites",
+              "kind": "app",
+              "location": "West Europe",
+              "tags": {
+                "hidden-related:/subscriptions/2d981ce6-1f39-462f-9ae6-b915230e0f93/resourceGroups/STORERAFA/providers/Microsoft.Web/serverfarms/ShopCET46Plan": "empty"
+              },
+              "properties": {
+                "name": "ShopCET46",
+                "state": "Running",
+                "hostNames": [
+                  "shopcet46.azurewebsites.net"
+                ],
+                "webSpace": "STORERAFA-WestEuropewebspace",
+                "selfLink": "https://waws-prod-am2-275.api.azurewebsites.windows.net:454/subscriptions/2d981ce6-1f39-462f-9ae6-b915230e0f93/webspaces/STORERAFA-WestEuropewebspace/sites/ShopCET46",
+                "repositorySiteName": "ShopCET46",
+                "owner": null,
+                "usageState": 0,
+                "enabled": true,
+                "adminEnabled": true,
+                "enabledHostNames": [
+                  "shopcet46.azurewebsites.net",
+                  "shopcet46.scm.azurewebsites.net"
+                ],
+                "siteProperties": {
+                  "metadata": null,
+                  "properties": [
+                    {
+                      "name": "LinuxFxVersion",
+                      "value": ""
+                    },
+                    {
+                      "name": "WindowsFxVersion",
+                      "value": null
+                    }
+                  ],
+                  "appSettings": null
+                },
+                "availabilityState": 0,
+                "sslCertificates": null,
+                "csrs": [],
+                "cers": null,
+                "siteMode": null,
+                "hostNameSslStates": [
+                  {
+                    "name": "shopcet46.azurewebsites.net",
+                    "sslState": 0,
+                    "ipBasedSslResult": null,
+                    "virtualIP": null,
+                    "thumbprint": null,
+                    "toUpdate": null,
+                    "toUpdateIpBasedSsl": null,
+                    "ipBasedSslState": 0,
+                    "hostType": 0
+                  },
+                  {
+                    "name": "shopcet46.scm.azurewebsites.net",
+                    "sslState": 0,
+                    "ipBasedSslResult": null,
+                    "virtualIP": null,
+                    "thumbprint": null,
+                    "toUpdate": null,
+                    "toUpdateIpBasedSsl": null,
+                    "ipBasedSslState": 0,
+                    "hostType": 1
+                  }
+                ],
+                "computeMode": null,
+                "serverFarm": null,
+                "serverFarmId": "/subscriptions/2d981ce6-1f39-462f-9ae6-b915230e0f93/resourceGroups/STORERAFA/providers/Microsoft.Web/serverfarms/ShopCET46Plan",
+                "reserved": false,
+                "isXenon": false,
+                "hyperV": false,
+                "lastModifiedTimeUtc": "2020-06-29T15:07:15.4766667",
+                "storageRecoveryDefaultState": "Running",
+                "contentAvailabilityState": 0,
+                "runtimeAvailabilityState": 0,
+                "siteConfig": {
+                  "numberOfWorkers": null,
+                  "defaultDocuments": null,
+                  "netFrameworkVersion": null,
+                  "phpVersion": null,
+                  "pythonVersion": null,
+                  "nodeVersion": null,
+                  "powerShellVersion": null,
+                  "linuxFxVersion": null,
+                  "windowsFxVersion": null,
+                  "requestTracingEnabled": null,
+                  "remoteDebuggingEnabled": null,
+                  "remoteDebuggingVersion": null,
+                  "httpLoggingEnabled": null,
+                  "azureMonitorLogCategories": null,
+                  "acrUseManagedIdentityCreds": false,
+                  "acrUserManagedIdentityID": null,
+                  "logsDirectorySizeLimit": null,
+                  "detailedErrorLoggingEnabled": null,
+                  "publishingUsername": null,
+                  "publishingPassword": null,
+                  "appSettings": null,
+                  "metadata": null,
+                  "connectionStrings": null,
+                  "machineKey": null,
+                  "handlerMappings": null,
+                  "documentRoot": null,
+                  "scmType": null,
+                  "use32BitWorkerProcess": null,
+                  "webSocketsEnabled": null,
+                  "alwaysOn": null,
+                  "javaVersion": null,
+                  "javaContainer": null,
+                  "javaContainerVersion": null,
+                  "appCommandLine": null,
+                  "managedPipelineMode": null,
+                  "virtualApplications": null,
+                  "winAuthAdminState": null,
+                  "winAuthTenantState": null,
+                  "customAppPoolIdentityAdminState": null,
+                  "customAppPoolIdentityTenantState": null,
+                  "runtimeADUser": null,
+                  "runtimeADUserPassword": null,
+                  "loadBalancing": null,
+                  "routingRules": null,
+                  "experiments": null,
+                  "limits": null,
+                  "autoHealEnabled": null,
+                  "autoHealRules": null,
+                  "tracingOptions": null,
+                  "vnetName": null,
+                  "cors": null,
+                  "push": null,
+                  "apiDefinition": null,
+                  "apiManagementConfig": null,
+                  "autoSwapSlotName": null,
+                  "localMySqlEnabled": null,
+                  "managedServiceIdentityId": null,
+                  "xManagedServiceIdentityId": null,
+                  "ipSecurityRestrictions": null,
+                  "scmIpSecurityRestrictions": null,
+                  "scmIpSecurityRestrictionsUseMain": null,
+                  "http20Enabled": null,
+                  "minTlsVersion": null,
+                  "ftpsState": null,
+                  "preWarmedInstanceCount": null,
+                  "healthCheckPath": null,
+                  "fileChangeAuditEnabled": null,
+                  "functionsRuntimeScaleMonitoringEnabled": null,
+                  "websiteTimeZone": null,
+                  "minimumElasticInstanceCount": 0
+                },
+                "deploymentId": "ShopCET46",
+                "trafficManagerHostNames": null,
+                "sku": "Free",
+                "scmSiteAlsoStopped": false,
+                "targetSwapSlot": null,
+                "hostingEnvironment": null,
+                "hostingEnvironmentProfile": null,
+                "clientAffinityEnabled": true,
+                "clientCertEnabled": false,
+                "clientCertMode": 0,
+                "clientCertExclusionPaths": null,
+                "hostNamesDisabled": false,
+                "domainVerificationIdentifiers": null,
+                "customDomainVerificationId": "C5E53D5102878FAE743AB46542D37D213FD6E68C20D2A7FB4FC708CC7A874850",
+                "kind": "app",
+                "inboundIpAddress": "13.69.68.13",
+                "possibleInboundIpAddresses": "13.69.68.13",
+                "ftpUsername": "ShopCET46\\$ShopCET46",
+                "ftpsHostName": "ftps://waws-prod-am2-275.ftp.azurewebsites.windows.net/site/wwwroot",
+                "outboundIpAddresses": "13.69.68.13,137.116.205.95,40.91.200.221,13.81.252.139,40.91.204.218",
+                "possibleOutboundIpAddresses": "13.69.68.13,137.116.205.95,40.91.200.221,13.81.252.139,40.91.204.218,40.91.205.9,23.97.213.163,104.46.53.177,23.97.131.79,40.91.204.71",
+                "containerSize": 0,
+                "dailyMemoryTimeQuota": 0,
+                "suspendedTill": null,
+                "siteDisabledReason": 0,
+                "functionExecutionUnitsCache": null,
+                "maxNumberOfWorkers": null,
+                "homeStamp": "waws-prod-am2-275",
+                "cloningInfo": null,
+                "hostingEnvironmentId": null,
+                "tags": {
+                  "hidden-related:/subscriptions/2d981ce6-1f39-462f-9ae6-b915230e0f93/resourceGroups/STORERAFA/providers/Microsoft.Web/serverfarms/ShopCET46Plan": "empty"
+                },
+                "resourceGroup": "STORERAFA",
+                "defaultHostName": "shopcet46.azurewebsites.net",
+                "slotSwapStatus": null,
+                "httpsOnly": true,
+                "redundancyMode": 0,
+                "inProgressOperationId": null,
+                "geoDistributions": null,
+                "privateEndpointConnections": [],
+                "buildVersion": null,
+                "targetBuildVersion": null
+              },
+              "identity": {
+                "type": "SystemAssigned",
+                "tenantId": "08c68d1a-db01-441a-a904-c02814e3771c",
+                "principalId": "d4aa144c-68c9-4731-b274-37c43e75d4c2"
+              },
+              "apiVersion": "2015-05-01"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
