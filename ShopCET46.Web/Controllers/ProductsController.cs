@@ -16,13 +16,20 @@ namespace ShopCET46.Web.Controllers
 
         private readonly IProductRepository _productRepository;
         private readonly IUserHelper _userHelper;
+        private readonly IImageHelper _imageHelper;
+        private readonly IConverterHelper _converterHelper;
 
-
-        public ProductsController(IProductRepository productRepository, IUserHelper userHelper)
+        public ProductsController(
+            IProductRepository productRepository,
+            IUserHelper userHelper,
+            IImageHelper imageHelper,
+            IConverterHelper converterHelper)
         {
 
             _productRepository = productRepository;
             _userHelper = userHelper;
+            _imageHelper = imageHelper;
+            _converterHelper = converterHelper;
         }
 
 
@@ -71,23 +78,10 @@ namespace ShopCET46.Web.Controllers
 
                 if (model.ImageFile != null && model.ImageFile.Length > 0)
                 {
-                    var guid = Guid.NewGuid().ToString();
-                    var file = $"{guid}.jpg";
-
-                    path = Path.Combine(
-                        Directory.GetCurrentDirectory(),
-                        "wwwroot\\images\\Products",
-                        file);
-
-                    using (var stream = new FileStream(path, FileMode.Create))
-                    {
-                        await model.ImageFile.CopyToAsync(stream);
-                    }
-
-                    path = $"~/images/Products/{file}";
+                    path = await _imageHelper.UploadImageAsync(model.ImageFile, "Products");
                 }
 
-                var product = this.ToProduct(model, path);
+                var product = _converterHelper.ToProduct(model, path, true);
 
                 //TODO: Change to the logged user
                 product.User = await _userHelper.GetUserByEmailAsync("rafaasfs@gmail.com");
@@ -97,7 +91,7 @@ namespace ShopCET46.Web.Controllers
             return View(model);
         }
 
-        private Product ToProduct(ProductViewModel view, string path)
+        /*private Product ToProduct(ProductViewModel view, string path)
         {
             return new Product
             {
@@ -111,7 +105,7 @@ namespace ShopCET46.Web.Controllers
                 Stock = view.Stock,
                 User = view.User
             };
-        }
+        }*/
 
         // GET: Products/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -128,12 +122,12 @@ namespace ShopCET46.Web.Controllers
             }
 
 
-            var view = this.ToProductViewModel(product);
+            var view = _converterHelper.ToProductViewModel(product);
 
             return View(view);
         }
 
-        private ProductViewModel ToProductViewModel(Product product)
+        /*private ProductViewModel ToProductViewModel(Product product)
         {
             return new ProductViewModel
             {
@@ -147,7 +141,7 @@ namespace ShopCET46.Web.Controllers
                 Stock = product.Stock,
                 User = product.User
             };
-        }
+        }*/
 
 
 
@@ -167,23 +161,10 @@ namespace ShopCET46.Web.Controllers
 
                     if (model.ImageFile != null && model.ImageFile.Length > 0)
                     {
-                        var guid = Guid.NewGuid().ToString();
-                        var file = $"{guid}.jpg";
-
-                        path = Path.Combine(
-                            Directory.GetCurrentDirectory(),
-                            "wwwroot\\images\\Products",
-                            file);
-
-                        using (var stream = new FileStream(path, FileMode.Create))
-                        {
-                            await model.ImageFile.CopyToAsync(stream);
-                        }
-
-                        path = $"~/images/Products/{file}";
+                        path = await _imageHelper.UploadImageAsync(model.ImageFile, "Products");
                     }
 
-                    var product = this.ToProduct(model, path);
+                    var product = _converterHelper.ToProduct(model, path, false);
 
                     //TODO: Change to the logged user
                     product.User = await _userHelper.GetUserByEmailAsync("rafaasfs@gmail.com");
