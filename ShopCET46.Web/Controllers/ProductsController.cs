@@ -1,16 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ShopCET46.Web.Data;
-using ShopCET46.Web.Data.Entities;
 using ShopCET46.Web.Helpers;
 using ShopCET46.Web.Models;
-using System;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace ShopCET46.Web.Controllers
 {
+    [Authorize]
     public class ProductsController : Controller
     {
 
@@ -84,7 +83,7 @@ namespace ShopCET46.Web.Controllers
                 var product = _converterHelper.ToProduct(model, path, true);
 
                 //TODO: Change to the logged user
-                product.User = await _userHelper.GetUserByEmailAsync("rafaasfs@gmail.com");
+                product.User = await _userHelper.GetUserByEmailAsync(this.User.Identity.Name);
                 await _productRepository.CreateAsync(product);
                 return RedirectToAction(nameof(Index));
             }
@@ -167,7 +166,7 @@ namespace ShopCET46.Web.Controllers
                     var product = _converterHelper.ToProduct(model, path, false);
 
                     //TODO: Change to the logged user
-                    product.User = await _userHelper.GetUserByEmailAsync("rafaasfs@gmail.com");
+                    product.User = await _userHelper.GetUserByEmailAsync(this.User.Identity.Name);
                     await _productRepository.UpdateAsync(product);
                 }
                 catch (DbUpdateConcurrencyException)
