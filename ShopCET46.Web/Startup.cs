@@ -43,6 +43,7 @@ namespace ShopCET46.Web
             .AddEntityFrameworkStores<DataContext>();
 
 
+
             services.AddAuthentication()
                 .AddCookie()
                 .AddJwtBearer(cfg =>

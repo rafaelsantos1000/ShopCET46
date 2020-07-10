@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 
 namespace ShopCET46.Web.Controllers
 {
-    [Authorize]
     public class ProductsController : Controller
     {
 
@@ -56,7 +55,9 @@ namespace ShopCET46.Web.Controllers
             return View(product);
         }
 
+
         // GET: Products/Create
+        [Authorize(Roles ="Admin")]
         public IActionResult Create()
         {
             return View();
@@ -107,6 +108,7 @@ namespace ShopCET46.Web.Controllers
         }*/
 
         // GET: Products/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -186,6 +188,7 @@ namespace ShopCET46.Web.Controllers
         }
 
         // GET: Products/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
