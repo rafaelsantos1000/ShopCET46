@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using ShopCET46.Web.Data;
+using ShopCET46.Web.Data.Repositories;
 using ShopCET46.Web.Data.Entities;
 using ShopCET46.Web.Helpers;
 using System.Text;
@@ -75,6 +76,7 @@ namespace ShopCET46.Web
             services.AddScoped<IMailHelper, MailHelper>();
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<ICountryRepository, CountryRepository>();
+            services.AddScoped<IOrderRepository, OrderRepository>();
 
 
             services.Configure<CookiePolicyOptions>(options =>
