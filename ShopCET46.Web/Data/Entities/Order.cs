@@ -34,11 +34,33 @@ namespace ShopCET46.Web.Data.Entities
 
 
 
-        [DisplayFormat(DataFormatString = "0:N2")]
+
+        [DisplayFormat(DataFormatString = "{0:N2}")]
+        public int Lines { get { return this.Items == null ? 0 : this.Items.Count(); } }
+
+
+
+        [DisplayFormat(DataFormatString = "{0:N2}")]
         public double Quantity => this.Items == null ? 0 : this.Items.Sum(i => i.Quantity);
 
 
 
         public decimal Value => this.Items == null ? 0 : this.Items.Sum(i => i.Value);
+
+
+        [DisplayName("Order date")]
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd hh:mm tt}", ApplyFormatInEditMode = false)]
+        public DateTime? OrderDateLocal
+        {
+            get
+            {
+                if(this.OrderDate == null)
+                {
+                    return null;
+                }
+
+                return this.OrderDate.ToLocalTime();
+            }
+        }
     }
 }

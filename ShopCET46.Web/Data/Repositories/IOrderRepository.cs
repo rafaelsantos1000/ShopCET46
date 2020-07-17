@@ -17,5 +17,11 @@ namespace ShopCET46.Web.Data.Repositories
 
 
         Task ModifyOrderDetailTempQuantityAsync(int id, double quantity);
+
+
+        Task DeleteDetailTempAsync(int id);
+
+
+        Task<bool> ConfirmOrderAsync(string userName);
     }
 }

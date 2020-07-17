@@ -49,6 +49,7 @@ namespace ShopCET46.Web.Controllers
 
         }
 
+
         [HttpPost]
         public async Task<IActionResult> AddProduct(AddItemViewModel model)
         {
@@ -62,5 +63,53 @@ namespace ShopCET46.Web.Controllers
             return this.View(model);
         }
 
-    }
+
+        public async Task<IActionResult> DeleteItem(int? id)
+        {
+            if(id == null)
+            {
+                return NotFound();
+            }
+
+            await _orderRepository.DeleteDetailTempAsync(id.Value);
+            return this.RedirectToAction("Create");
+        }
+
+
+
+        public async Task<IActionResult> Increase(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            await _orderRepository.ModifyOrderDetailTempQuantityAsync(id.Value, 1);
+            return this.RedirectToAction("Create");
+        }
+
+
+        public async Task<IActionResult> Decrease(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            await _orderRepository.ModifyOrderDetailTempQuantityAsync(id.Value, -1);
+            return this.RedirectToAction("Create");
+        }
+
+
+        public async Task<IActionResult> ConfirmOrder()
+        {
+            var response = await _orderRepository.ConfirmOrderAsync(this.User.Identity.Name);
+            if (response)
+            {
+                return this.RedirectToAction("Index");
+            }
+
+            return this.RedirectToAction("Create");
+        }
+     }
 }
