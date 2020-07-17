@@ -23,5 +23,11 @@ namespace ShopCET46.Web.Data.Repositories
 
 
         Task<bool> ConfirmOrderAsync(string userName);
+
+
+        Task DeliverOrderAsync(DeliverViewModel model);
+
+
+        Task<Order> GetOrderAsync(int id);
     }
 }

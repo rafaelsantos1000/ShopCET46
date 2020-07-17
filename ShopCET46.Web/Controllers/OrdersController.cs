@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using ShopCET46.Web.Data.Repositories;
 using ShopCET46.Web.Models;
-using System.Threading.Tasks;
+
 
 namespace ShopCET46.Web.Controllers
 {
@@ -45,7 +46,7 @@ namespace ShopCET46.Web.Controllers
                 Products = _productRepository.GetComboProducts()
             };
 
-        return View(model);
+            return View(model);
 
         }
 
@@ -66,7 +67,7 @@ namespace ShopCET46.Web.Controllers
 
         public async Task<IActionResult> DeleteItem(int? id)
         {
-            if(id == null)
+            if (id == null)
             {
                 return NotFound();
             }
@@ -111,5 +112,45 @@ namespace ShopCET46.Web.Controllers
 
             return this.RedirectToAction("Create");
         }
-     }
+
+
+
+        public async Task<IActionResult> Deliver(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var order = await _orderRepository.GetOrderAsync(id.Value);
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            var model = new DeliverViewModel
+            {
+                Id = order.Id,
+                DeliveryDate = DateTime.Today
+            };
+
+            return View(model);
+
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> Deliver(DeliverViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                await _orderRepository.DeliverOrderAsync(model);
+                return this.RedirectToAction("Index");
+            }
+
+
+            return View();
+
+        }
+    }
 }
