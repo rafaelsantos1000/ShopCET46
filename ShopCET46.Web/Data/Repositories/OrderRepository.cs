@@ -116,6 +116,7 @@ namespace ShopCET46.Web.Data.Repositories
             }
         }
 
+
         public async Task DeleteDetailTempAsync(int id)
         {
             var orderDetailTemp = await _context.OrderDetailsTemp.FindAsync(id);
@@ -127,6 +128,7 @@ namespace ShopCET46.Web.Data.Repositories
             _context.OrderDetailsTemp.Remove(orderDetailTemp);
             await _context.SaveChangesAsync();
         }
+
 
         public async Task<bool> ConfirmOrderAsync(string userName)
         {

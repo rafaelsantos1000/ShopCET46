@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore.Internal;
 using ShopCET46.Web.Data.Entities;
 using ShopCET46.Web.Helpers;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -32,6 +33,28 @@ namespace ShopCET46.Web.Data
             await _userHelper.CheckRoleAsync("Customer");
 
 
+            if (!_context.Countries.Any())
+            {
+                var cities = new List<City>();
+                cities.Add(new City { Name = "Lisboa" });
+                cities.Add(new City { Name = "Porto" });
+                cities.Add(new City { Name = "Coimbra" });
+                cities.Add(new City { Name = "Faro" });
+
+
+                _context.Countries.Add(new Country
+                {
+                    Cities = cities,
+                    Name = "Portugal"
+                });
+
+
+                await _context.SaveChangesAsync();
+            }
+
+
+
+
             var user = await _userHelper.GetUserByEmailAsync("rafaasfs@gmail.com");
             if(user == null)
             {
@@ -41,7 +64,10 @@ namespace ShopCET46.Web.Data
                     LastName = "Santos",
                     Email = "rafaasfs@gmail.com",
                     UserName = "rafaasfs@gmail.com",
-                    PhoneNumber = "223232323"
+                    PhoneNumber = "223232323",
+                    Address = "Rua Da Luz 23 2D",
+                    CityId = _context.Countries.FirstOrDefault().Cities.FirstOrDefault().Id,
+                    City = _context.Countries.FirstOrDefault().Cities.FirstOrDefault()
                 };
 
                 var result = await _userHelper.AddUserAsync(user, "123456");
